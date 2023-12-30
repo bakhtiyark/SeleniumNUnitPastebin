@@ -1,14 +1,15 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using PageObjectModel.Source.Pages;
 
 namespace SeleniumNUnitPastebin
 {
     public class Tests
     {
-        private readonly string code = "Hello from Webdriver";
-        private readonly string title = "helloweb";
         private IWebDriver driver;
+        readonly HomePage page = new HomePage();
+        
         [SetUp]
         public void Setup()
         {
@@ -20,22 +21,10 @@ namespace SeleniumNUnitPastebin
         [Test]
         public void Test1()
         {
-            IWebElement textArea = driver.FindElement(By.Id("postform-text"));
-            textArea.Click();
-            textArea.SendKeys(code);
-            
-            IWebElement expirationPeriodToggle = driver.FindElement(By.Id("select2-postform-expiration-container"));
-            expirationPeriodToggle.Click();
-            IWebElement desiredExpiration = driver.FindElement(By.XPath("//li[text()='10 Minutes']"));
-            desiredExpiration.Click();
-
-            IWebElement pasteTitle = driver.FindElement(By.Id("postform-name"));
-            pasteTitle.SendKeys(title);
-
-            IWebElement submitButton = driver.FindElement(By.XPath("//button[contains(text(), \"Create New Paste\")]"));
-            submitButton.Click();
+            page.FillPasteForm();
 
             IWebElement resultScreen = driver.FindElement(By.XPath("//ol[@class=\"text\"]"));
+            // TO BE REPLACED With something similar to PW's contains() method
             Assert.True(resultScreen != null);
         }
         [TearDown]
