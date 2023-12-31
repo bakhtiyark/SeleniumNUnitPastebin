@@ -1,8 +1,4 @@
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using PageObjectModel.Source.Pages;
+using NUnit.Framework.Interfaces;
 
 namespace SeleniumNUnitPastebin.Tests
 {
@@ -10,6 +6,7 @@ namespace SeleniumNUnitPastebin.Tests
     {
         private IWebDriver driver;
         private HomePage page;
+        private string expectedText;
 
         [SetUp]
         public void Setup()
@@ -21,7 +18,10 @@ namespace SeleniumNUnitPastebin.Tests
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             page = new HomePage(driver);
 
-        
+            string jsonData = File.ReadAllText("../../../framework/datalayer.json");
+            dynamic testData = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonData);
+            expectedText = testData.code;
+
         }
 
         [Test]
@@ -31,7 +31,6 @@ namespace SeleniumNUnitPastebin.Tests
 
             IWebElement resultScreen = driver.FindElement(By.XPath("//ol[@class=\"text\"]"));
             string resultText = resultScreen.Text;
-            string expectedText = "Hello from Webdriver";
             Assert.True(resultText.Contains(expectedText));
         }
         [TearDown]

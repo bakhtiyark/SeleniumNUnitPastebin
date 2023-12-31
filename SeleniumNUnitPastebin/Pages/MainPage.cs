@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace PageObjectModel.Source.Pages
+﻿namespace PageObjectModel.Source.Pages
 {
     public class HomePage
     {
