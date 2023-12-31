@@ -1,13 +1,16 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace PageObjectModel.Source.Pages
 {
     public class HomePage
     {
+        private IWebDriver driver;
         private readonly string code = "Hello from Webdriver";
         private readonly string title = "helloweb";
-        private readonly IWebDriver driver = new ChromeDriver();
+        public HomePage(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
         public void FillPasteForm()
         {
             InsertCode(code);
