@@ -28,9 +28,8 @@ namespace SeleniumNUnitPastebin.Tests
         public void Test()
         {
             page.FillPasteForm();
-
-            IWebElement resultScreen = driver.FindElement(By.XPath("//ol[@class=\"text\"]"));
-            string resultText = resultScreen.Text;
+            string resultText = page.getResultScreenText();
+            
             Assert.True(resultText.Contains(expectedText));
         }
         [TearDown]

@@ -36,6 +36,11 @@
             IWebElement pasteTitle = driver.FindElement(By.Id("postform-name"));
             pasteTitle.SendKeys(title);
         }
+        public string getResultScreenText()
+        {
+            IWebElement resultScreen = driver.FindElement(By.XPath("//ol[@class=\"text\"]"));
+            return resultScreen.Text;
+        }
 
     }
 }
