@@ -15,10 +15,12 @@ namespace SeleniumNUnitPastebin.MainPage;
 
         //Page elements for interaction
         public IWebElement PasteTitle => Helper.LocateElement(Locators.ID, "postform-name");
+        public IWebElement HighlightDropdown => Helper.LocateElement(Locators.ID, "select2-postform-format-container");
+        public IWebElement BashOption => Helper.LocateElement(Locators.Xpath,"//li[text()=\"Bash\"]");
         public IWebElement DesiredExpiration => Helper.LocateElement(Locators.Xpath, "//li[text()='10 Minutes']");
         public IWebElement ExpirationPeriodToggle => Helper.LocateElement(Locators.ID, "select2-postform-expiration-container");
         public IWebElement TextArea => Helper.LocateElement(Locators.ID, "postform-text");
         public IWebElement SubmitButton => Helper.LocateElement(Locators.Xpath, "//button[contains(text(), \"Create New Paste\")]");
-        public IWebElement ResultScreen => Helper.LocateElement(Locators.Xpath, "//ol[@class=\"text\"]");
+        public IWebElement ResultScreen => Helper.LocateElement(Locators.Xpath, "//ol");
 
     }

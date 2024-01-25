@@ -2,36 +2,45 @@
 {
     public class MainPage
     {
-        private readonly string code = "Hello from Webdriver";
-        private readonly string title = "helloweb";
-        public readonly MainPageMap Map;
+        private readonly MainPageMap Map;
         public MainPage(IWebDriver driver)
         {
             Map = new MainPageMap(driver);
         }
-        public void FillPasteForm()
+        public void FillPasteForm(int taskNumber)
         {
-            InsertCode(code);
+            InsertCode(TestData.TaskCode[taskNumber]);
+            HighlightText(taskNumber);
             SetExpiration();
-            AddTitle(title);
+            AddTitle(TestData.TaskTitle[taskNumber]);
             Map.SubmitButton.Click();
         }
-        public void InsertCode(string message)
+
+        private void InsertCode(string message)
         {
             Map.TextArea.Click();
             Map.TextArea.SendKeys(message);
         }
-        public void SetExpiration()
+        private void HighlightText(int taskNumber)
+        {
+            if (taskNumber != 2) return;
+            Map.HighlightDropdown.Click();
+            Map.BashOption.Click();
+        }
+
+        private void SetExpiration()
         {
             Map.ExpirationPeriodToggle.Click();
             Map.DesiredExpiration.Click();
         }
-        public void AddTitle(string title)
+
+        private void AddTitle(string title)
         {
             Map.PasteTitle.SendKeys(title);
         }
-        public string getResultScreenText()
+        public string GetResultScreenText()
         {
+            // Console.WriteLine(Map.ResultScreen.Text);
             return Map.ResultScreen.Text;
         }
 
