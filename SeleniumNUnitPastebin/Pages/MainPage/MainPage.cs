@@ -38,11 +38,31 @@
         {
             Map.PasteTitle.SendKeys(title);
         }
-        public string GetResultScreenText()
+        public string GetResultScreenCode()
         {
-            // Console.WriteLine(Map.ResultScreen.Text);
-            return Map.ResultScreen.Text;
+            return Map.ResultScreenCode.Text;
         }
+        public string GetResultScreenTitle()
+        {
+            return Map.ResultScreenTitle.Text;
+        }
+
+        public string GetResultScreenHighlight()
+        {
+            return Map.ResultScreenHighlight.Text;
+        }
+        public Dictionary<string, string> GetPageResults()
+        {
+            var results = new Dictionary<string, string>
+            {
+                { "Code", GetResultScreenCode() },
+                { "Title", GetResultScreenTitle() },
+                { "Highlight", GetResultScreenHighlight() }
+            };
+
+            return results;
+        }
+
 
     }
 }
